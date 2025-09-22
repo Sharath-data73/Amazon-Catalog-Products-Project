@@ -144,7 +144,7 @@ SELECT * FROM final_cleaned_data;
 - Understanding of data pipelines for analytics
 - Hands-on experience integrating SQL and Power BI
 - 
-## 📊 Dashboard Preview
+##  Dashboard Preview
 
 ![Dashboard](<img width="1342" height="752" alt="Amazon Dashboard" src="https://github.com/user-attachments/assets/bdba848b-d2d0-4cfc-a1df-8ff87b980648" />
 )
