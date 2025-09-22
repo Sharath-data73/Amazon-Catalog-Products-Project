@@ -79,9 +79,11 @@ SELECT * FROM final_cleaned_data;
 - Practical SQL data wrangling for real-world messiness
 - Understanding of data pipelines for analytics
 - Hands-on experience integrating SQL and Power BI
+- 
 ##  Dashboard Preview
 
-![Dashboard Screenshot](<img width="1342" height="752" alt="Amazon Dashboard" src="https://github.com/user-attachments/assets/ab787667-15cb-4fdd-b436-ce42222e312c" />
+| ----------- |
+![My Image](<img width="1342" height="752" alt="Amazon Dashboard" src="https://github.com/user-attachments/assets/f675ea12-aaab-4c90-8eb0-aaf2bd8960b3" />
 )
 
 
