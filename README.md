@@ -4,7 +4,7 @@ This project demonstrates end-to-end data cleaning, transformation, and analysis
 
 
 ---
-## 💡 Project Objectives
+##  Project Objectives
 
 - Clean and standardize inconsistent product, sales, and returns data
 - Join multiple data sources into a single analytical dataset
@@ -129,7 +129,7 @@ Example final output:
 SELECT * FROM final_cleaned_data;
 
  ##  HIGHLIGHTS OF THIS DATA CLEANING PIPELINE
--- =============================================
+
 -  Normalizes messy category, status, region, and payment fields using CASE + LOWER/TRIM/REPLACE
 -  Handles multiple date formats using COALESCE + STR_TO_DATE for robust parsing
 -  Removes duplicate products using ROW_NUMBER based on launch date, price, and name
@@ -144,9 +144,9 @@ SELECT * FROM final_cleaned_data;
 - Understanding of data pipelines for analytics
 - Hands-on experience integrating SQL and Power BI
 - 
-##  Dashboard Preview
+## 📊 Dashboard Preview
 
-![Dashboard](<img width="1342" height="752" alt="Amazon Dashboard" src="https://github.com/user-attachments/assets/f675ea12-aaab-4c90-8eb0-aaf2bd8960b3" />
+![Dashboard](<img width="1342" height="752" alt="Amazon Dashboard" src="https://github.com/user-attachments/assets/bdba848b-d2d0-4cfc-a1df-8ff87b980648" />
 )
 
 
