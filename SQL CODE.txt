@@ -1,0 +1,144 @@
+WITH cleaned_table as (
+select product_id, product_name,
+case
+when lower(trim(category)) like 'elect%' then 'Electronics'
+when lower(replace(category,'_',' '))  like 'home%' then 'Home & Kitchen'
+when lower(trim(category)) like 'fitness%' then 'Fitness & Wearables'
+else 'others'
+end as clean_category,
+coalesce(
+str_to_date(launch_date,'%d/%m/%Y'),
+str_to_date(launch_date,'%Y-%m-%d'),
+str_to_date(launch_date,'%Y/%m/%d'),
+str_to_date(launch_date,'%m/%d/%Y')
+
+
+) as clean_launch_date,
+case 
+when lower(trim(status)) = 'active' then 'Active'
+when lower(trim(status)) in ('inactive','inactve') then 'Inactive'
+when lower(trim(status)) = 'discontinued' then 'Discontinued'
+else 'others'
+end as clean_status,
+NULLIF(price, 0) as clean_price
+
+from raw_product_catalog
+
+
+
+
+),
+
+catalog_clean as (
+select * from 
+(select ct.*, row_number() over(partition by ct.product_id order by ct.clean_launch_date asc, ct.clean_price desc, ct.product_name asc) as rn
+from cleaned_table ct) x
+where x.rn=1
+
+
+),
+
+sales_clean as (
+select 
+order_id,
+product_id,
+coalesce(
+str_to_date(sale_date,'%Y-%m-%d'),
+str_to_date(sale_date,'%Y/%m/%d'),
+str_to_date(sale_date,'%d/%m/%Y'),
+str_to_date(sale_date,'%d-%m-%Y')
+) as clean_sale_date,
+nullif(unit_price,0) as clean_unit_price,
+nullif(quantity,0) as clean_quantity,
+
+case
+when lower(trim(region)) like 'us%' then 'US'
+when lower(trim(region)) like 'eu%' then 'EU'
+when lower(trim(region)) like 'asia%' then 'Asia'
+when lower(trim(region)) like 'canada%' then 'Canada'
+else 'other'
+end as clean_region,
+
+case
+when lower(trim(payment_method)) like 'paypal%' then 'PayPal'
+when lower(trim(payment_method)) like 'pay pal%' then 'PayPal'
+when lower(trim(payment_method)) like 'debit%' then 'Debit'
+when lower(trim(payment_method)) like 'bank%' then 'Bank'
+when lower(trim(payment_method)) in ('cc','credit card') then 'Credit Card'
+else 'other'
+end as clean_paymnt
+
+from sales_data
+
+
+),
+
+sales_clean_v2 as(
+select * from sales_clean
+where clean_sale_date is not null 
+and
+clean_unit_price is not null
+and
+clean_quantity > 0
+),
+
+
+returns_clean as (
+select 
+return_id,
+product_id,
+order_id,
+coalesce(
+str_to_date(return_date,'%Y-%m-%d'),
+str_to_date(return_date,'%Y/%m/%d'),
+str_to_date(return_date,'%d/%m/%Y'),
+str_to_date(return_date,'%d-%m-%Y')
+) as clean_return_date,
+
+case
+when lower(trim(return_reason)) like 'defect%' then 'Defective'
+when lower(trim(return_reason)) like 'late%' then 'Late Delivery'
+when lower(trim(return_reason)) like 'wrong%' then 'Wrong Item'
+when lower(trim(return_reason)) like 'changed%' then 'Changed Mind'
+else 'Unknown'
+end as clean_return_reason
+
+from returns_data
+
+),
+
+sales_joined as(
+
+select sv.order_id, sv.product_id, cc.product_name, cc.clean_category, cc.clean_status, cc.clean_launch_date, sv.clean_sale_date, sv.clean_unit_price, sv.clean_quantity, sv.clean_region, sv.clean_paymnt
+from sales_clean_v2 sv inner join catalog_clean cc
+on sv.product_id = cc.product_id
+
+),
+
+retunrs_valid as(
+select rc.return_id, rc.order_id, rc.product_id,rc.clean_return_date, rc.clean_return_reason 
+from returns_clean rc 
+inner join sales_clean_v2 sv on rc.order_id = sv.order_id
+inner join catalog_clean cc on rc.product_id = cc.product_id
+
+
+)
+select 
+sj.order_id, 
+sj.product_id, 
+sj.product_name, 
+sj.clean_category as category, 
+sj.clean_status as status, 
+sj.clean_launch_date, 
+sj.clean_sale_date, 
+sj.clean_unit_price, 
+sj.clean_quantity, 
+sj.clean_region, 
+sj.clean_paymnt,
+rv.clean_return_date,
+rv.clean_return_reason
+from sales_joined sj
+left join retunrs_valid rv
+on sj.order_id = rv.order_id and sj.product_id = rv.product_id
+order by sj.order_id, sj.clean_sale_date
+;
