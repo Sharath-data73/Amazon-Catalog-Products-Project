@@ -64,25 +64,25 @@ Example final output:
 
 SELECT * FROM final_cleaned_data;
 
+ ##  HIGHLIGHTS OF THIS DATA CLEANING PIPELINE
 -- =============================================
--- 🔍 HIGHLIGHTS OF THIS DATA CLEANING PIPELINE
--- =============================================
---  Normalizes messy category, status, region, and payment fields using CASE + LOWER/TRIM/REPLACE
---  Handles multiple date formats using COALESCE + STR_TO_DATE for robust parsing
---  Removes duplicate products using ROW_NUMBER based on launch date, price, and name
---  Filters out invalid sales (null dates, zero price/quantity) before joins
---  Standardizes return reasons into consistent categories (e.g. 'Defective', 'Late Delivery')
---  Uses LEFT JOIN to preserve all sales even if no return data exists
---  Structured with modular CTEs for clarity, reusability, and maintainability
+-  Normalizes messy category, status, region, and payment fields using CASE + LOWER/TRIM/REPLACE
+-  Handles multiple date formats using COALESCE + STR_TO_DATE for robust parsing
+-  Removes duplicate products using ROW_NUMBER based on launch date, price, and name
+-  Filters out invalid sales (null dates, zero price/quantity) before joins
+-  Standardizes return reasons into consistent categories (e.g. 'Defective', 'Late Delivery')
+-  Uses LEFT JOIN to preserve all sales even if no return data exists
+-  Structured with modular CTEs for clarity, reusability, and maintainability
 
 ##  Learnings
 
 - Practical SQL data wrangling for real-world messiness
 - Understanding of data pipelines for analytics
 - Hands-on experience integrating SQL and Power BI
-## 📊 Dashboard Preview
+##  Dashboard Preview
 
-![Dashboard Screenshot](<img width="1342" height="752" alt="Amazon Dashboard" src="https://github.com/user-attachments/assets/85cb3b6f-4cb0-47a6-84c6-bb47a9f30e6d" />
+![Dashboard Screenshot](<img width="1342" height="752" alt="Amazon Dashboard" src="https://github.com/user-attachments/assets/ab787667-15cb-4fdd-b436-ce42222e312c" />
 )
+
 
 
