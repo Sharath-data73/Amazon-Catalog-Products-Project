@@ -75,7 +75,7 @@ This project uses the `ROW_NUMBER()` function to:
 ###  5. Combines Sales, Product, and Return Data into One Unified Table
 
 Using SQL joins, the script combines data from:
-- 🛍 Product catalog
+-  Product catalog
 -  Sales transactions
 -  Return records
 
