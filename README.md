@@ -140,8 +140,9 @@ SELECT * FROM final_cleaned_data;
 
 ##  Dashboard Preview
 
-![Dashboard](<img width="1342" height="752" alt="Amazon Dashboard" src="https://github.com/user-attachments/assets/bdba848b-d2d0-4cfc-a1df-8ff87b980648" />
+![Alt Text](<img width="1342" height="752" alt="Amazon Dashboard" src="https://github.com/user-attachments/assets/58a5bb0b-11ec-49f0-bd15-689f5a94195f" />
 )
+
 
 ##  Learnings
 
