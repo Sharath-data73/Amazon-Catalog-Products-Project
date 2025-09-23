@@ -140,7 +140,8 @@ SELECT * FROM final_cleaned_data;
 
 ##  Dashboard Preview
 
-![Image]("C:\Users\91818\OneDrive\Pictures\Amazon Dashboard.png")
+![Test Image]("C:\Users\91818\OneDrive\Pictures\Amazon Dashboard.png")
+
 
 
 
