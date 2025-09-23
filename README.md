@@ -140,7 +140,8 @@ SELECT * FROM final_cleaned_data;
 
 ##  Dashboard Preview
 
-![Test Image]("C:\Users\91818\OneDrive\Pictures\Amazon Dashboard.png")
+![Test Image](<img width="1342" height="752" alt="Amazon Dashboard" src="https://github.com/user-attachments/assets/148645d2-d8f4-4ddc-8d3d-3f373d806f92" />
+)
 
 
 
